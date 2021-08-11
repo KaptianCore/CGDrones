@@ -17,7 +17,7 @@ ENT.Speed = 800
 ENT.UpSpeed = 3300
 ENT.RotateSpeed = 5
 ENT.AngOffset = 4
-ENT.NoiseCoefficient = 0.8
+ENT.NoiseCoefficient = 0.5
 ENT.Alignment = 3
 
 ENT.Damping = 1
@@ -43,7 +43,7 @@ ENT.AllowPitchRestrictions = false
 ENT.HealthAmount = 250
 ENT.DefaultHealth = 250
 
-ENT.Fuel = 125
+ENT.Fuel = 200
 ENT.MaxFuel = 125
 ENT.FuelReduction = 0.1
 
