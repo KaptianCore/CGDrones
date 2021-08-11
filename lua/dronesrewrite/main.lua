@@ -141,5 +141,5 @@ DRONES_REWRITE.DoPrecache = function()
 end
 
 if SERVER then
-    MsgC(Color(0, 255, 0), "\nCG AUS Army Recon Drones has been loaded!\n")
+    MsgC(Color(0, 255, 0), "\nCG Drones has been loaded!\n")
 end
