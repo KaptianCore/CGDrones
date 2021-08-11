@@ -77,28 +77,13 @@ if CLIENT then
 	DRONES_REWRITE.ClientCVars.CustomOverlay = CreateClientConVar("dronesrewrite_curoverlay", "Default", true, false)
 
 	DRONES_REWRITE.ClientCVars.DrawTpCrosshair = CreateClientConVar("dronesrewrite_cl_crosshairtp", "1", true, false)
-	DRONES_REWRITE.ClientCVars.NoGlows = CreateClientConVar("dronesrewrite_cl_noglows", "0", true, false)
-	DRONES_REWRITE.ClientCVars.NoScreen = CreateClientConVar("dronesrewrite_cl_noscreen", "0", true, false)
-	DRONES_REWRITE.ClientCVars.NoConWin = CreateClientConVar("dronesrewrite_cl_noconwin", "0", true, false)
-	DRONES_REWRITE.ClientCVars.DefaultTp = CreateClientConVar("dronesrewrite_cl_deftp", "0", true, false)
-	DRONES_REWRITE.ClientCVars.NoConRender = CreateClientConVar("dronesrewrite_cl_noconrender", "0", true, false)
 	DRONES_REWRITE.ClientCVars.CamDistanceCoefficient = CreateClientConVar("dronesrewrite_cl_cameradistance", "0", true, false)
 	DRONES_REWRITE.ClientCVars.CamOrientation = CreateClientConVar("dronesrewrite_cl_camorientation", "Right", true, false)
 	DRONES_REWRITE.ClientCVars.QuickSel = CreateClientConVar("dronesrewrite_cl_quickwepsel", "0", true, false)
 	DRONES_REWRITE.ClientCVars.NoMuzzleFlash = CreateClientConVar("dronesrewrite_cl_dismuzzleflash", "0", true, false)
 	DRONES_REWRITE.ClientCVars.DrawAttachments = CreateClientConVar("dronesrewrite_cl_drawattachments", "0", true, false)
-	DRONES_REWRITE.ClientCVars.DisableHell = CreateClientConVar("dronesrewrite_cl_nohell", "0", true, false)
 
 	DRONES_REWRITE.ClientCVars.WvCamOrientation = CreateClientConVar("dronesrewrite_cl_wvcamorientation", "Right", true, true)
-
-	-- AI and serverside cvars
-	DRONES_REWRITE.ClientCVars.AInpcs = CreateClientConVar("dronesrewrite_ai_noattacknpcs", "0", true, true)
-	DRONES_REWRITE.ClientCVars.AIplys = CreateClientConVar("dronesrewrite_ai_noattackplayers", "0", true, true)
-	DRONES_REWRITE.ClientCVars.AIdron = CreateClientConVar("dronesrewrite_ai_noattackdrones", "0", true, true)
-	DRONES_REWRITE.ClientCVars.AIfrie = CreateClientConVar("dronesrewrite_ai_noattackfr", "0", true, true)
-	DRONES_REWRITE.ClientCVars.AIowne = CreateClientConVar("dronesrewrite_ai_attackowner", "0", true, true)
-	DRONES_REWRITE.ClientCVars.AIradi = CreateClientConVar("dronesrewrite_ai_radius", "3000", true, true)
-	DRONES_REWRITE.ClientCVars.AIflyz = CreateClientConVar("dronesrewrite_ai_flyzdistance", "100", true, true)
 
 	DRONES_REWRITE.ClientCVars.MouseLimit = CreateClientConVar("dronesrewrite_cl_mouselimit", "16", true, true)
 	DRONES_REWRITE.ClientCVars.Hints = CreateClientConVar("dronesrewrite_cl_nomessage", "0", true, true)
