@@ -1009,7 +1009,7 @@ function ENT:InitCounts()
 end
 
 function ENT:SetupOwner(ply)
-    self:GetOwner() = ply
+    self.Owner = ply
 end
 
 function ENT:SpawnFunction(ply, tr, class)
