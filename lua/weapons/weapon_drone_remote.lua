@@ -40,12 +40,12 @@ end
 
 function SWEP:DrawHUD()
     if SERVER then return end
-    if self.Owner:GetNWEntity("DronesRewriteDrone"):IsValid() then return end
+    if self:GetOwner():GetNWEntity("DronesRewriteDrone"):IsValid() then return end
 
     local tr = util.TraceLine({
         start = EyePos(),
-        endpos = self.Owner:GetShootPos() + self.Owner:GetAimVector() * self.RemoteDRRDistance,
-        filter = self.Owner
+        endpos = self:GetOwner():GetShootPos() + self:GetOwner():GetAimVector() * self.RemoteDRRDistance,
+        filter = self:GetOwner()
     })
 
     local ent = tr.Entity
@@ -64,7 +64,7 @@ function SWEP:DrawHUD()
         local tr = util.TraceLine({
             start = EyePos(),
             endpos = pos,
-            filter = self.Owner
+            filter = self:GetOwner()
         })
 
         if tr.Hit and tr.Entity ~= ent then return end
@@ -80,20 +80,20 @@ end
 
 function SWEP:Think()
     if SERVER and IsValid(self.TargetDRR) then
-        if self.TargetDRR:IsFarFarAway(self.Owner) then
+        if self.TargetDRR:IsFarFarAway(self:GetOwner()) then
             self.TargetDRR = NULL
             self:SetNWEntity("DronesRewriteDrone", NULL)
             self:EmitSound("drones/alarm.wav", 75, 64)
         end
     end
 
-    if CLIENT and self.Owner:KeyDown(IN_RELOAD) and CurTime() > self.WaitDRR and not self.Owner:GetNWEntity("DronesRewriteDrone"):IsValid() then
+    if CLIENT and self:GetOwner():KeyDown(IN_RELOAD) and CurTime() > self.WaitDRR and not self:GetOwner():GetNWEntity("DronesRewriteDrone"):IsValid() then
         self.WaitDRR = CurTime() + 0.3
 
         local tr = util.TraceLine({
-            start = self.Owner:GetShootPos(),
-            endpos = self.Owner:GetShootPos() + self.Owner:GetAimVector() * self.RemoteDRRDistance,
-            filter = self.Owner
+            start = self:GetOwner():GetShootPos(),
+            endpos = self:GetOwner():GetShootPos() + self:GetOwner():GetAimVector() * self.RemoteDRRDistance,
+            filter = self:GetOwner()
         })
 
         local drone = tr.Entity
@@ -103,7 +103,7 @@ function SWEP:Think()
         end
 
         if not drone.IS_DRR then return end
-        --if not drone:CanBeControlledBy(self.Owner) then return end
+        --if not drone:CanBeControlledBy(self:GetOwner()) then return end
         local win = DRONES_REWRITE.CreateWindow(365, 400)
         local p = DRONES_REWRITE.CreateScrollPanel(0, 25, 365, 375, win)
         win:SetTitle("This is key menu")
@@ -131,9 +131,9 @@ end
 
 function SWEP:PrimaryAttack()
     local tr = util.TraceLine({
-        start = self.Owner:GetShootPos(),
-        endpos = self.Owner:GetShootPos() + self.Owner:GetAimVector() * self.RemoteDRRDistance,
-        filter = self.Owner
+        start = self:GetOwner():GetShootPos(),
+        endpos = self:GetOwner():GetShootPos() + self:GetOwner():GetAimVector() * self.RemoteDRRDistance,
+        filter = self:GetOwner()
     })
 
     local ent = tr.Entity
@@ -147,7 +147,7 @@ function SWEP:PrimaryAttack()
         self:SetNextSecondaryFire(CurTime() + 0.5)
 
         if SERVER then
-            ent:SetDriver(self.Owner)
+            ent:SetDriver(self:GetOwner())
         end
     end
 end
@@ -155,19 +155,19 @@ end
 function SWEP:SecondaryAttack()
     self:SetNextPrimaryFire(CurTime() + 0.9)
     self:SetNextSecondaryFire(CurTime() + 0.9)
-    self.Owner:SetAnimation(PLAYER_ATTACK1)
+    self:GetOwner():SetAnimation(PLAYER_ATTACK1)
     self.Weapon:SendWeaponAnim(ACT_VM_PRIMARYATTACK)
     self:DoIdle()
 
     timer.Create("request_drone" .. self:EntIndex(), self:SequenceDuration() * 0.35, 1, function()
         if not IsValid(self) then return end
-        self.Owner:EmitSound("ambient/machines/keyboard7_clicks_enter.wav", 65, 150)
+        self:GetOwner():EmitSound("ambient/machines/keyboard7_clicks_enter.wav", 65, 150)
         if CLIENT then return end
 
         local tr = util.TraceLine({
-            start = self.Owner:GetShootPos(),
-            endpos = self.Owner:GetShootPos() + self.Owner:GetAimVector() * self.RemoteDRRDistance,
-            filter = self.Owner
+            start = self:GetOwner():GetShootPos(),
+            endpos = self:GetOwner():GetShootPos() + self:GetOwner():GetAimVector() * self.RemoteDRRDistance,
+            filter = self:GetOwner()
         })
 
         if tr.Hit and IsValid(tr.Entity) and tr.Entity.IS_DRR then
@@ -182,7 +182,7 @@ function SWEP:SecondaryAttack()
                     tab = {}
 
                     for k, v in pairs(DRONES_REWRITE.GetDronesRewrite()) do
-                        if not v:IsFarFarAway(self.Owner) then
+                        if not v:IsFarFarAway(self:GetOwner()) then
                             table.insert(tab, v)
                         end
                     end
@@ -200,8 +200,8 @@ function SWEP:SecondaryAttack()
         end
 
         if not IsValid(self.TargetDRR) then
-            self.Owner:EmitSound("buttons/lightswitch2.wav", 65, 160)
-        elseif self.TargetDRR:CanBeControlledBy(self.Owner) then
+            self:GetOwner():EmitSound("buttons/lightswitch2.wav", 65, 160)
+        elseif self.TargetDRR:CanBeControlledBy(self:GetOwner()) then
             self:SetNWBool("Draw", true)
             local pitch = 200
 

@@ -212,9 +212,9 @@ function ENT:Controls()
 end
 
 function ENT:CanBeControlledBy_skipai(ply)
-    local noOwner = not IsValid(self.Owner)
+    local noOwner = not IsValid(self:GetOwner())
     local hacked = self.AllowControl
-    local isOwner = ply == self.Owner
+    local isOwner = ply == self:GetOwner()
     local isStealable = DRONES_REWRITE.ServerCVars.AllowStealing:GetBool()
     local isAdmin = (ply:IsAdmin() and DRONES_REWRITE.ServerCVars.AllowAdmins:GetBool())
     local inFriends = (self.DRRFriendsControlling and table.HasValue(self.DRRFriendsControlling, ply:SteamID()))
@@ -323,7 +323,7 @@ function ENT:SetDriver(ply, maxDistance, transmitter)
     if ply:IsValid() then
         DRONES_REWRITE.LogDebug(string.format("Trying to set driver to %s", ply:Name()))
 
-        if not IsValid(self.Owner) then
+        if not IsValid(self:GetOwner()) then
             ply:ChatPrint("[Drones] Now you're owner of " .. self:GetUnit())
             self:SetupOwner(ply)
         end
@@ -465,7 +465,7 @@ function ENT:AddModule(name)
 
     local module = self.Modules[name]
     if not module then return end
-    if module.AdminOnly and not (self.Owner:IsAdmin() or DRONES_REWRITE.ServerCVars.AllowAdminModules:GetBool()) then return end
+    if module.AdminOnly and not (self:GetOwner():IsAdmin() or DRONES_REWRITE.ServerCVars.AllowAdminModules:GetBool()) then return end
 
     if not DRONES_REWRITE.ServerCVars.NoSlots:GetBool() and module.Slot then
         local limit = self.Slots[module.Slot]
@@ -1009,7 +1009,7 @@ function ENT:InitCounts()
 end
 
 function ENT:SetupOwner(ply)
-    self.Owner = ply
+    self:GetOwner() = ply
 end
 
 function ENT:SpawnFunction(ply, tr, class)
